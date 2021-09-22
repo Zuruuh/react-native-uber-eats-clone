@@ -1,13 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { tabReducer } from "features/tabs/tabSlice";
-import { categoryReducer } from "features/categories/categorySlice";
-import { bottomPopperReducer } from "features/bottomPopper/bottomPopperSlice";
+import { tabReducer } from "reducers/tabs/tabSlice";
+import { categoryReducer } from "reducers/categories/categorySlice";
+import { bottomPopperReducer } from "reducers/bottomPopper/bottomPopperSlice";
+import { searchBarReducer } from "reducers/searchBar/searchBarSlice";
 
 export const store = configureStore({
   reducer: {
     tab: tabReducer,
     category: categoryReducer,
     bottomPopper: bottomPopperReducer,
+    searchBar: searchBarReducer,
   },
 });
 

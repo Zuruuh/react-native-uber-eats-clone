@@ -5,6 +5,8 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
+    "react-native-google-places-autocomplete": "^2.4.1",
+    "react-native-vector-icons": "^8.1.0",
     "react-native-web": "~0.13.12",
     "react-redux": "^7.2.5"
   },
@@ -14,6 +16,7 @@
     "@types/react-native": "~0.63.2",
     "babel-plugin-module-resolve": "^0.0.8",
     "metro-react-native-babel-preset": "^0.66.2",
+    "react-native-dotenv": "^3.2.0",
     "typescript": "~4.0.0"
   },
   "scripts": {

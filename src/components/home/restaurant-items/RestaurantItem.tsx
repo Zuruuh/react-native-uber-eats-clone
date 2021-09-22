@@ -4,7 +4,10 @@ import { Restaurant } from "types/restaurant";
 import RestaurantImage from "./RestaurantImage";
 import RestaurantInfo from "./RestaurantInfo";
 
-export default function RestaurantItem(props: { restaurant: Restaurant }) {
+export default function RestaurantItem(props: {
+  restaurant: Restaurant;
+  nav: any;
+}) {
   return (
     <TouchableOpacity
       activeOpacity={0.8}
@@ -13,6 +16,9 @@ export default function RestaurantItem(props: { restaurant: Restaurant }) {
         backgroundColor: "#fff",
         paddingBottom: 10,
         borderRadius: 5,
+      }}
+      onPress={() => {
+        props.nav.navigate("details", { restaurant: { ...props.restaurant } });
       }}
     >
       <View>

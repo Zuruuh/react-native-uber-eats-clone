@@ -65,3 +65,4 @@ web-build/
 
 # App Secret
 .env
+src/app/firebase.json

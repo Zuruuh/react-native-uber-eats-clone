@@ -8,4 +8,11 @@ export interface Restaurant {
   phone?: string;
   distance: number;
   reviewCount: number;
+  categories?: RestaurantCategory[];
+  price?: string;
+}
+
+export interface RestaurantCategory {
+  alias?: string;
+  title?: string;
 }

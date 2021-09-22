@@ -1,15 +1,20 @@
 import React from "react";
 import { View, Text, Image } from "react-native";
 
-export default function About() {
-  const image = "https://bit.ly/3hWWiGk";
+export default function About(props: { route: any }) {
+  const { name, categories, price, image_url, reviewCount, averageRating } =
+    props.route.params.restaurant;
 
+  const formattedCategories: string = categories
+    .map((category) => category.title)
+    .join(" • ");
+  const description = `${formattedCategories} ${price ? " • " + price : ""} • 🎫 • ${averageRating} ⭐ • (${reviewCount})+`; //prettier-ignore
   return (
     <View>
       {/* Image */}
       <View>
         <Image
-          source={{ uri: image }}
+          source={{ uri: !image_url ? "https://bit.ly/3hWWiGk" : image_url }}
           style={{
             width: "100%",
             height: 180,
@@ -25,7 +30,7 @@ export default function About() {
           marginHorizontal: 15,
         }}
       >
-        Farmhouse Kitchen thai Cuisine
+        {name}
       </Text>
       {/* Description */}
       <Text
@@ -35,7 +40,7 @@ export default function About() {
           fontSize: 15.5,
         }}
       >
-        Description
+        {description}
       </Text>
     </View>
   );

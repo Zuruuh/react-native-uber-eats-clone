@@ -8,8 +8,8 @@ import {
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "store/store";
-import { setCategory } from "features/categories/categorySlice";
-import { setbottomPopper } from "features/bottomPopper/bottomPopperSlice";
+import { setCategory } from "reducers/categories/categorySlice";
+import { setbottomPopper } from "reducers/bottomPopper/bottomPopperSlice";
 
 export default function Category(props: { title: string; image: string }) {
   const activeCategory = useSelector(

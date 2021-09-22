@@ -1,4 +1,4 @@
-import { setbottomPopper } from "features/bottomPopper/bottomPopperSlice";
+import { setbottomPopper } from "reducers/bottomPopper/bottomPopperSlice";
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome5";

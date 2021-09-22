@@ -1,8 +1,8 @@
 import React from "react";
 import { Text, TouchableOpacity } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "app/store";
-import { setTab } from "features/tabs/tabSlice";
+import { RootState } from "store/store";
+import { setTab } from "reducers/tabs/tabSlice";
 
 export default function HeaderButton(props: { text: string }) {
   const activeTab = useSelector((state: RootState) => state.tab.value);

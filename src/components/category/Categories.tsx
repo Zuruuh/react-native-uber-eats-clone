@@ -1,6 +1,5 @@
 import React from "react";
 import { View } from "react-native";
-import { useDispatch } from "react-redux";
 import Category from "./Category";
 import SeeAllCategories from "./SeeAllCategories";
 import { categories as categoriesData } from "data/categories";

@@ -1,4 +1,4 @@
-import { setbottomPopper } from "features/bottomPopper/bottomPopperSlice";
+import { setbottomPopper } from "reducers/bottomPopper/bottomPopperSlice";
 import React from "react";
 import { Pressable, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";

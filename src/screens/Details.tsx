@@ -2,14 +2,17 @@ import React from "react";
 import { View } from "react-native";
 import { Divider } from "react-native-elements";
 import About from "components/details/about/About";
-import Nav from "components/home/navbar/Nav";
+import MenuItems from "components/details/menu-items/MenuItems";
 
 export default function Details() {
   return (
     <>
-      <View>
+      <View style={{ height: "100%" }}>
         <About />
-        <Divider width={1.8} style={{ marginVertical: 20 }} />
+        <Divider width={1.8} style={{ marginTop: 20, marginBottom: 10 }} />
+        <View style={{ flex: 1 }}>
+          <MenuItems />
+        </View>
       </View>
     </>
   );

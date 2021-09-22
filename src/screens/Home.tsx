@@ -9,7 +9,7 @@ import RestaurantItems from "components/home/restaurant-items/RestaurantItems";
 import Nav from "components/home/navbar/Nav";
 import SafeViewAndroid from "components/views/SafeViewAndroid";
 
-export default function Home() {
+export default function Home(props: { navigation: any }) {
   return (
     <SafeAreaView
       style={[
@@ -23,7 +23,7 @@ export default function Home() {
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
         <Categories />
-        <RestaurantItems />
+        <RestaurantItems nav={props.navigation} />
       </ScrollView>
       <Nav />
       <PopperContainer>

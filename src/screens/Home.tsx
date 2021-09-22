@@ -1,12 +1,12 @@
-import PlacesSearchBar from "components/search/PlacesSearchBar";
+import PlacesSearchBar from "components/home/search/PlacesSearchBar";
 import React from "react";
 import { SafeAreaView, ScrollView, View } from "react-native";
-import HeaderTabs from "components/header/HeaderTabs";
-import Categories from "components/category/Categories";
-import CategoryPopper from "components/category/CategoryPopper";
-import PopperContainer from "components/popper/PopperContainer";
-import RestaurantItems from "components/restaurant-items/RestaurantItems";
-import Nav from "components/navbar/Nav";
+import HeaderTabs from "components/home/header/HeaderTabs";
+import Categories from "components/home/category/Categories";
+import CategoryPopper from "components/home/category/CategoryPopper";
+import PopperContainer from "components/home/popper/PopperContainer";
+import RestaurantItems from "components/home/restaurant-items/RestaurantItems";
+import Nav from "components/home/navbar/Nav";
 import SafeViewAndroid from "components/views/SafeViewAndroid";
 
 export default function Home() {

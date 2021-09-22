@@ -6,12 +6,15 @@ module.exports = function (api) {
       [
         "module-resolver",
         {
-          root: ["./src"],
+          root: ["./"],
           alias: {
             components: "./src/components",
             features: "./src/features",
             screens: "./src/screens",
             store: "./src/app",
+            assets: "./assets",
+            data: "./data",
+            types: "./src/types",
           },
         },
       ],

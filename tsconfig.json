@@ -5,7 +5,8 @@
       "@components/*": ["components/*"],
       "@features/*": ["features/*"],
       "@screens/*": ["screens/*"],
-      "@store/*": ["app/*"]
+      "@store/*": ["app/*"],
+      "@env": [".env"]
     }
   },
   "extends": "expo/tsconfig.base"

@@ -8,7 +8,12 @@ import SafeViewAndroid from "./src/components/views/SafeViewAndroid";
 export default function App() {
   return (
     <Provider store={store}>
-      <SafeAreaView style={SafeViewAndroid.AndroidSafeArea}>
+      <SafeAreaView
+        style={[
+          SafeViewAndroid.AndroidSafeArea,
+          { backgroundColor: "#eee", flex: 1 },
+        ]}
+      >
         <Home />
       </SafeAreaView>
     </Provider>

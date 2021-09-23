@@ -6,6 +6,7 @@ import {
 import { NavigationContainer } from "@react-navigation/native";
 import Home from "screens/Home";
 import Details from "screens/Details";
+import Onboarding from "screens/Onboarding";
 
 export default function RootNavigation() {
   const Stack = createStackNavigator();
@@ -15,7 +16,8 @@ export default function RootNavigation() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="home" screenOptions={screenOptions}>
+      <Stack.Navigator screenOptions={screenOptions}>
+        <Stack.Screen name="onboarding" component={Onboarding} />
         <Stack.Screen name="home" component={Home} />
         <Stack.Screen name="details" component={Details} />
       </Stack.Navigator>

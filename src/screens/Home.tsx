@@ -6,7 +6,7 @@ import Categories from "components/home/category/Categories";
 import CategoryPopper from "components/home/category/CategoryPopper";
 import PopperContainer from "components/home/popper/PopperContainer";
 import RestaurantItems from "components/home/restaurant-items/RestaurantItems";
-import Nav from "components/home/navbar/Nav";
+import Nav from "components/layout/navbar/Nav";
 import SafeViewAndroid from "components/views/SafeViewAndroid";
 
 export default function Home(props: { navigation: any }) {

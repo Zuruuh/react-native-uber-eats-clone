@@ -1,13 +1,12 @@
-import PlacesSearchBar from "components/home/search/PlacesSearchBar";
+import PlacesSearchBar from "components/address/Searchbar";
 import React from "react";
 import { SafeAreaView, ScrollView, StyleSheet, View } from "react-native";
 import HeaderTabs from "components/home/header/HeaderTabs";
 import Categories from "components/home/category/Categories";
-import CategoryPopper from "components/home/category/CategoryPopper";
-import PopperContainer from "components/home/popper/PopperContainer";
 import RestaurantItems from "components/home/restaurant-items/RestaurantItems";
 import Nav from "components/layout/navbar/Nav";
 import SafeViewAndroid from "components/views/SafeViewAndroid";
+import AddressSelector from "components/home/address/AddressSelector";
 
 interface props {
   navigation: any;
@@ -24,7 +23,7 @@ export default function Home({ navigation }: props) {
       <View style={styles.container}>
         <View style={styles.innerContainer}>
           <HeaderTabs />
-          <PlacesSearchBar />
+          <AddressSelector />
           <ScrollView showsVerticalScrollIndicator={false}>
             <Categories />
             <RestaurantItems nav={navigation} />

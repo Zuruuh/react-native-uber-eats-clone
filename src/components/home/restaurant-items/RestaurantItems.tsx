@@ -4,18 +4,26 @@ import RestaurantItem from "./RestaurantItem";
 // @ts-ignore
 import { YELP_APIKEY } from "@env";
 import { Restaurant, RestaurantCategory } from "types/restaurant";
+import { useSelector } from "react-redux";
+import { RootState } from "store/store";
 
-export default function RestaurantItems(props: { nav: any }) {
-  const YELP_API_URL =
-    "https://api.yelp.com/v3/businesses/search?term=restaurant&limit=10&sort_by=distance&location=Livry-Gargan,France";
+interface props {
+  nav: any;
+}
+
+export default function RestaurantItems({ nav }: props) {
+  const activeAddress = useSelector((state: RootState) => state.address.value);
   const [restaurantsData, setRestaurantsData] = React.useState<
     Restaurant[] | any
   >([]);
 
   React.useEffect(() => {
     const fetchRestaurantsData = async () => {
-      // setTimeout(() => {}, 2000);
-      // Add a loading component
+      const city = activeAddress?.address?.split(",")[0];
+      const YELP_API_URL = `https://api.yelp.com/v3/businesses/search?term=restaurant&limit=10&sort_by=distance&location=${
+        city ?? "Paris"
+      }`;
+
       const { businesses } = await (
         await fetch(YELP_API_URL, {
           headers: { Authorization: `Bearer ${YELP_APIKEY}` },
@@ -41,11 +49,11 @@ export default function RestaurantItems(props: { nav: any }) {
       setRestaurantsData(data);
     };
     fetchRestaurantsData();
-  }, []);
+  }, [activeAddress]);
   return (
     <View style={{ marginTop: 10, padding: 15, backgroundColor: "#eee" }}>
       {restaurantsData.map((restaurant, index) => (
-        <RestaurantItem key={index} restaurant={restaurant} nav={props.nav} />
+        <RestaurantItem key={index} restaurant={restaurant} nav={nav} />
       ))}
     </View>
   );

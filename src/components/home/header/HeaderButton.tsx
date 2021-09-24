@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "store/store";
 import { setTab } from "reducers/tabs/tabSlice";
@@ -12,35 +12,50 @@ export default function HeaderButton(props: { text: string }) {
   const darkMode = useDarkMode();
   return (
     <TouchableOpacity
-      style={{
-        backgroundColor:
-          activeTab === props.text
-            ? darkMode
+      style={[
+        {
+          backgroundColor: darkMode
+            ? activeTab === props.text
               ? palette.lightPrimary
               : palette.darkSecondary
-            : palette.darkSecondary,
-        paddingVertical: 6,
-        paddingHorizontal: 16,
-        borderRadius: 30,
-      }}
+            : activeTab === props.text
+            ? palette.darkPrimary
+            : palette.lightSecondary,
+        },
+        styles.container,
+      ]}
       onPress={() => {
         dispatch(setTab(props.text));
       }}
     >
       <Text
-        style={{
-          color:
-            activeTab === props.text
-              ? darkMode
-                ? palette.darkPrimary
+        style={[
+          {
+            color: darkMode
+              ? activeTab === props.text
+                ? palette.darkSecondary
                 : palette.lightPrimary
-              : palette.lightPrimary,
-          fontSize: 15,
-          fontWeight: "900",
-        }}
+              : activeTab === props.text
+              ? palette.lightPrimary
+              : palette.darkPrimary,
+          },
+          styles.text,
+        ]}
       >
         {props.text}
       </Text>
     </TouchableOpacity>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    paddingVertical: 6,
+    paddingHorizontal: 16,
+    borderRadius: 30,
+  },
+  text: {
+    fontSize: 15,
+    fontWeight: "900",
+  },
+});

@@ -54,7 +54,7 @@ const dynamicStyles = new DynamicStyleSheet({
     justifyContent: "flex-start",
     paddingHorizontal: 15,
     backgroundColor: new DynamicValue(
-      palette.lightSecondary,
+      palette.lightPrimary,
       palette.darkTertiary
     ),
     borderRadius: 15,

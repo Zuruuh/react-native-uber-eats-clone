@@ -59,7 +59,7 @@ const dynamicStyles = new DynamicStyleSheet({
     borderRadius: 15,
     marginTop: 15,
     backgroundColor: new DynamicValue(
-      palette.lightSecondary,
+      palette.lightPrimary,
       palette.darkTertiary
     ),
   },

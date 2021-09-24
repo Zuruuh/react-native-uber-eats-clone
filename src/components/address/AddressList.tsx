@@ -16,6 +16,7 @@ export default function AddressList({ nav }: props) {
   const user = useSelector((state: RootState) => state.user.value);
   const activeAddress = useSelector((state: RootState) => state.address.value);
   const dispatch = useDispatch();
+
   const [snapshot] = useCollection(
     db.collection("addresses").doc(user.email).collection("addresses")
   );
@@ -53,6 +54,7 @@ export default function AddressList({ nav }: props) {
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: 10,
     paddingHorizontal: 10,
   },
 });

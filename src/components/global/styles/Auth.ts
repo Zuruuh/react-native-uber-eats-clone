@@ -1,6 +1,7 @@
-import { StyleSheet } from "react-native";
+import { DynamicStyleSheet, DynamicValue } from "react-native-dynamic";
+import palette from "./palette";
 
-export default StyleSheet.create({
+export default new DynamicStyleSheet({
   container: {
     flex: 1,
     alignItems: "center",
@@ -16,6 +17,7 @@ export default StyleSheet.create({
     alignItems: "center",
   },
   title: {
+    color: new DynamicValue(palette.darkPrimary, palette.lightPrimary),
     fontSize: 24,
   },
   formContainer: {
@@ -25,6 +27,7 @@ export default StyleSheet.create({
   buttonTitle: {
     marginTop: 10,
     textAlign: "center",
+    color: new DynamicValue(palette.darkPrimary, palette.lightPrimary),
   },
   buttonContainer: {
     width: "80%",
@@ -43,6 +46,6 @@ export default StyleSheet.create({
   buttonLinkText: {
     fontSize: 18,
     fontWeight: "500",
-    color: "#2e64e5",
+    color: palette.primary,
   },
 });

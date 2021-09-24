@@ -7,11 +7,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "store/store";
 import { setAddress } from "reducers/address/addressSlice";
 import { Address } from "types/address";
+import {
+  useDynamicValue,
+  DynamicStyleSheet,
+  DynamicValue,
+  useDarkMode,
+} from "react-native-dynamic";
+import palette from "styles/palette";
 
 export default function AddressSelector() {
   const activeAddress = useSelector((state: RootState) => state.address.value);
   const user = useSelector((state: RootState) => state.user.value);
   const dispatch = useDispatch();
+  const darkMode = useDarkMode();
   const [pickedAddress, setPickedAddress] = React.useState(
     JSON.stringify(activeAddress)
   );
@@ -36,9 +44,11 @@ export default function AddressSelector() {
     dispatch(setAddress(JSON.parse(pickedAddress)));
   }, [pickedAddress]);
 
+  const styles = useDynamicValue(dynamicStyles);
+
   return (
     <View>
-      {loading && <Text>Loading</Text>}
+      {loading && <Text style={styles.text}>Loading</Text>}
       {!loading && (
         <>
           {snapshot?.docs.length > 0 && (
@@ -52,6 +62,7 @@ export default function AddressSelector() {
                 <Picker.Item
                   key={doc.id}
                   label={doc.id}
+                  color={"grey"}
                   value={JSON.stringify({
                     name: doc.id,
                     email: user.email,
@@ -73,8 +84,12 @@ export default function AddressSelector() {
   );
 }
 
-const styles = StyleSheet.create({
+const dynamicStyles = new DynamicStyleSheet({
   text: {
     textAlign: "center",
+    color: new DynamicValue(palette.darkPrimary, palette.lightPrimary),
+  },
+  modal: {
+    backgroundColor: "#f00",
   },
 });

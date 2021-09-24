@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "store/store";
 import { setNavbar } from "reducers/navbar/navbarSlice";
+import { useDarkMode } from "react-native-dynamic";
+import palette from "styles/palette";
 
 interface props {
   button: navButton;
@@ -14,7 +16,28 @@ interface props {
 export default function NavButton({ button, nav }: props) {
   const currentNav = useSelector((state: RootState) => state.navbar.value);
   const dispatch = useDispatch();
-
+  const darkMode = useDarkMode();
+  let color;
+  darkMode
+    ? currentNav === button.id
+      ? palette.lightPrimary
+      : palette.lightTertiary
+    : currentNav === button.id
+    ? palette.darkPrimary
+    : palette.darkSecondary;
+  if (darkMode) {
+    if (currentNav === button.id) {
+      color = palette.lightPrimary;
+    } else {
+      color = palette.lightAccent;
+    }
+  } else {
+    if (currentNav === button.id) {
+      color = palette.darkPrimary;
+    } else {
+      color = palette.darkSecondary;
+    }
+  }
   return (
     <TouchableOpacity
       onPress={() => {
@@ -27,12 +50,12 @@ export default function NavButton({ button, nav }: props) {
           icon={button.icon}
           size={24}
           style={styles.icon}
-          color={currentNav === button.id ? "#000" : "#5D5F63"}
+          color={color}
         />
         <Text
           style={[
             {
-              color: currentNav === button.id ? "#000" : "#5D5F63",
+              color,
             },
             styles.text,
           ]}

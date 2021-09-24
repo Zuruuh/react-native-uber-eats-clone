@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import React from "react";
 import * as yup from "yup";
-import AuthStyle from "styles/Auth";
+import AuthDynamicStyles from "styles/Auth";
 import { auth } from "store/firebase";
 import Form from "components/forms/Form";
 import FormInput from "components/forms/FormInput";
@@ -18,8 +18,9 @@ import FormCheckbox from "components/forms/FormCheckbox";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useDispatch } from "react-redux";
 import { setUser } from "reducers/user/userSlice";
-import SafeViewAndroid from "components/views/SafeViewAndroid";
-
+import ScreenStyles from "styles/Screens";
+import { useDynamicValue } from "react-native-dynamic";
+import palette from "styles/palette";
 interface User {
   email: string;
   password: string;
@@ -39,13 +40,15 @@ interface props {
 }
 export default function Login({ navigation }: props) {
   const dispatch = useDispatch();
+  const styles = useDynamicValue(ScreenStyles);
+  const AuthStyle = useDynamicValue(AuthDynamicStyles);
 
   React.useEffect(() => {
-    const rememberUser = async (): Promise<any> => {
-      await AsyncStorage.setItem("@user", "mB1NbzVCEOMLG08CJIAqRdYNoOV2");
-      const uid = await AsyncStorage.getItem("@user");
-      return uid;
-    };
+    // const rememberUser = async (): Promise<any> => {
+    //   await AsyncStorage.setItem("@user", "mB1NbzVCEOMLG08CJIAqRdYNoOV2");
+    //   const uid = await AsyncStorage.getItem("@user");
+    //   return uid;
+    // };
   }, []);
 
   const login = ({ email, password, rememberMe }: User, nav: any) => {
@@ -82,15 +85,15 @@ export default function Login({ navigation }: props) {
       });
   };
   return (
-    <SafeAreaView style={SafeViewAndroid.AndroidSafeArea}>
-      <View style={AuthStyle.container}>
-        <Image
+    <SafeAreaView style={styles.safeArea}>
+      <View style={[styles.container, AuthStyle.container]}>
+        {/* <Image
           style={AuthStyle.image}
           source={require("assets/icons/uber-eats-logo-2.png")}
           resizeMode="contain"
-        />
+        /> */}
         <View style={AuthStyle.titleContainer}>
-          <Text style={AuthStyle.title}>Register</Text>
+          <Text style={AuthStyle.title}>Login</Text>
         </View>
         <View style={AuthStyle.formContainer}>
           <Form
@@ -113,7 +116,7 @@ export default function Login({ navigation }: props) {
               passwordField={true}
             />
             <FormCheckbox title="rememberMe" label="Stay logged in ?" />
-            <FormSubmit text="Login" background="#2E64E5" />
+            <FormSubmit text="Login" background={palette.primary} />
           </Form>
         </View>
         <View style={AuthStyle.buttonContainer}>

@@ -1,52 +1,62 @@
 import React from "react";
 import { View } from "react-native";
 import Category from "./Category";
-import SeeAllCategories from "./SeeAllCategories";
 import { categories as categoriesData } from "data/categories";
 import { Category as CategoriesType } from "types/category";
+import {
+  useDynamicValue,
+  DynamicStyleSheet,
+  DynamicValue,
+} from "react-native-dynamic";
+import palette from "styles/palette";
+import { ScrollView } from "react-native-gesture-handler";
 
 export default function Categories() {
   const [categories, setCategories] = React.useState([]);
   React.useEffect(() => {
-    const getCategories = () => {
-      setCategories(
-        categoriesData.sort((a, b) =>
-          a.name.localeCompare(b.name)
-        ) as CategoriesType[]
-      );
-    };
-    getCategories();
+    setCategories(
+      categoriesData.sort((a, b) =>
+        a.name.localeCompare(b.name)
+      ) as CategoriesType[]
+    );
   }, []);
-  const stripCategories = (length) => {
-    return categories.slice(0, length);
-  };
+
+  const styles = useDynamicValue(dynamicStyles);
+
   return (
-    <View
-      style={{
-        marginTop: 5,
-        backgroundColor: "#fff",
-        paddingVertical: 10,
-        justifyContent: "space-around",
-        flexDirection: "row",
-      }}
-    >
-      {categories.length > 4 &&
-        stripCategories(3).map((category) => (
-          <Category
-            key={category.id}
-            title={category.name}
-            image={category.image}
-          />
+    <View style={styles.container}>
+      <ScrollView
+        horizontal={true}
+        showsHorizontalScrollIndicator={false}
+        style={styles.innerContainer}
+      >
+        {categories.map((category) => (
+          <View key={category.id} style={styles.item}>
+            <Category category={category} />
+          </View>
         ))}
-      {categories.length > 4 && <SeeAllCategories />}
-      {categories.length < 5 &&
-        categories.map((category) => (
-          <Category
-            key={category.id}
-            title={category.name}
-            image={category.url}
-          />
-        ))}
+      </ScrollView>
     </View>
   );
 }
+
+const dynamicStyles = new DynamicStyleSheet({
+  container: {
+    marginTop: 5,
+    backgroundColor: new DynamicValue(
+      palette.lightPrimary,
+      palette.darkPrimary
+    ),
+    paddingVertical: 10,
+    justifyContent: "space-around",
+    flexDirection: "row",
+  },
+  innerContainer: {
+    padding: 10,
+    paddingHorizontal: 20,
+    width: "100%",
+  },
+  item: {
+    marginRight: 15,
+  },
+});

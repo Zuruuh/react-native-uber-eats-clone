@@ -6,6 +6,12 @@ import { YELP_APIKEY } from "@env";
 import { Restaurant, RestaurantCategory } from "types/restaurant";
 import { useSelector } from "react-redux";
 import { RootState } from "store/store";
+import {
+  DynamicStyleSheet,
+  useDynamicValue,
+  DynamicValue,
+} from "react-native-dynamic";
+import palette from "styles/palette";
 
 interface props {
   nav: any;
@@ -16,6 +22,7 @@ export default function RestaurantItems({ nav }: props) {
   const [restaurantsData, setRestaurantsData] = React.useState<
     Restaurant[] | any
   >([]);
+  const styles = useDynamicValue(dynamicStyles);
 
   React.useEffect(() => {
     const fetchRestaurantsData = async () => {
@@ -51,10 +58,21 @@ export default function RestaurantItems({ nav }: props) {
     fetchRestaurantsData();
   }, [activeAddress]);
   return (
-    <View style={{ marginTop: 10, padding: 15, backgroundColor: "#eee" }}>
+    <View style={styles.container}>
       {restaurantsData.map((restaurant, index) => (
         <RestaurantItem key={index} restaurant={restaurant} nav={nav} />
       ))}
     </View>
   );
 }
+
+const dynamicStyles = new DynamicStyleSheet({
+  container: {
+    marginTop: 10,
+    padding: 15,
+    backgroundColor: new DynamicValue(
+      palette.lightTertiary,
+      palette.darkTertiary
+    ),
+  },
+});

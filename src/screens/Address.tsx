@@ -1,19 +1,26 @@
 import AddressAdd from "components/address/AddressAdd";
 import AddressList from "components/address/AddressList";
 import Nav from "components/layout/navbar/Nav";
-import SafeViewAndroid from "components/views/SafeViewAndroid";
 import React from "react";
-import { View, Text, SafeAreaView, StyleSheet } from "react-native";
-
+import { View, Text, SafeAreaView } from "react-native";
+import ScreenStyles from "styles/Screens";
+import {
+  useDynamicValue,
+  DynamicStyleSheet,
+  DynamicValue,
+} from "react-native-dynamic";
+import palette from "styles/palette";
 interface props {
   navigation: any;
 }
 
 export default function Address({ navigation }: props) {
+  const screenStyles = useDynamicValue(ScreenStyles);
+  const styles = useDynamicValue(dynamicStyles);
   return (
-    <SafeAreaView style={SafeViewAndroid.AndroidSafeArea}>
-      <View style={styles.container}>
-        <View style={styles.innerContainer}>
+    <SafeAreaView style={screenStyles.safeArea}>
+      <View style={screenStyles.container}>
+        <View style={[screenStyles.innerContainer, styles.container]}>
           <View>
             <Text style={styles.title}>Your saved addresses 👇</Text>
           </View>
@@ -26,17 +33,13 @@ export default function Address({ navigation }: props) {
   );
 }
 
-const styles = StyleSheet.create({
+const dynamicStyles = new DynamicStyleSheet({
   container: {
-    width: "100%",
-    height: "100%",
-  },
-  innerContainer: {
-    height: "92%",
-    paddingHorizontal: 5,
+    paddingTop: 30,
   },
   title: {
     textAlign: "center",
     fontSize: 32,
+    color: new DynamicValue(palette.darkPrimary, palette.lightPrimary),
   },
 });

@@ -1,60 +1,72 @@
 import React from "react";
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  ImageURISource,
-} from "react-native";
+import { View, Text, Image, TouchableOpacity } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "store/store";
 import { setCategory } from "reducers/categories/categorySlice";
 import { setbottomPopper } from "reducers/bottomPopper/bottomPopperSlice";
+import {
+  useDynamicValue,
+  DynamicStyleSheet,
+  DynamicValue,
+} from "react-native-dynamic";
+import palette from "styles/palette";
+import { Category as CategoryType } from "types/category";
 
-export default function Category(props: { title: string; image: string }) {
+interface props {
+  category: CategoryType;
+}
+
+export default function Category({ category }: props) {
   const activeCategory = useSelector(
     (state: RootState) => state.category.value
   );
   activeCategory;
   const dispatch = useDispatch();
+  const styles = useDynamicValue(dynamicStyles);
   return (
     <TouchableOpacity
       onPress={() => {
         dispatch(setbottomPopper(""));
-        dispatch(setCategory(props.title));
+        dispatch(setCategory(category.name));
       }}
     >
-      <View
-        style={{
-          alignItems: "center",
-        }}
-      >
-        <View
-          style={{
-            backgroundColor: "#eee",
-            paddingVertical: 5,
-            paddingHorizontal: 10,
-            borderRadius: 10,
-          }}
-        >
+      <View style={styles.innerContainer}>
+        <View style={styles.item}>
           <Image
-            source={props.image as ImageURISource}
-            style={{
-              width: 65,
-              height: 55,
-              resizeMode: "contain",
-            }}
+            resizeMode="contain"
+            source={{ uri: category.image }}
+            style={styles.icon}
           />
         </View>
-        <Text
-          style={{
-            fontSize: 13,
-            fontWeight: "900",
-          }}
-        >
-          {props.title}
-        </Text>
+        <Text style={styles.title}>{category.name}</Text>
       </View>
     </TouchableOpacity>
   );
 }
+
+const dynamicStyles = new DynamicStyleSheet({
+  container: {
+    marginRight: 15,
+  },
+  innerContainer: {
+    alignItems: "center",
+  },
+  item: {
+    backgroundColor: new DynamicValue(
+      palette.lightTertiary,
+      palette.darkTertiary
+    ),
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    borderRadius: 10,
+  },
+  icon: {
+    width: 65,
+    height: 55,
+  },
+  title: {
+    fontSize: 13,
+    fontWeight: "900",
+    color: new DynamicValue(palette.darkPrimary, palette.lightPrimary),
+  },
+});

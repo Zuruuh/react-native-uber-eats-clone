@@ -8,6 +8,12 @@ import { setAddress } from "reducers/address/addressSlice";
 import { db } from "store/firebase";
 import { RootState } from "store/store";
 import { Address } from "types/address";
+import {
+  useDynamicValue,
+  DynamicStyleSheet,
+  DynamicValue,
+} from "react-native-dynamic";
+import palette from "styles/palette";
 
 interface props {
   address: Address;
@@ -15,8 +21,8 @@ interface props {
 }
 
 export default function AddressButton({ address, nav }: props) {
-  const activeAddress = useSelector((state: RootState) => state.address.value);
   const dispatch = useDispatch();
+  const styles = useDynamicValue(dynamicStyles);
   const deleteAddress = () => {
     db.collection("addresses")
       .doc(address.email)
@@ -29,30 +35,36 @@ export default function AddressButton({ address, nav }: props) {
   return (
     <View style={styles.container}>
       <View style={styles.textContainer}>
-        <Text style={styles.title}>{address.name}</Text>
-        <Text>{address.address}</Text>
+        <Text style={[styles.title, styles.text]}>{address.name}</Text>
+        <Text style={styles.text}>{address.address}</Text>
       </View>
       <View style={styles.buttonContainer}>
         <TouchableOpacity onPress={deleteAddress} style={styles.deleteButton}>
-          <FontAwesomeIcon icon={faTrashAlt} size={24} color="#f00" />
+          <FontAwesomeIcon icon={faTrashAlt} size={24} color={palette.error} />
         </TouchableOpacity>
       </View>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
+const dynamicStyles = new DynamicStyleSheet({
   container: {
     marginVertical: 5,
     flexDirection: "row",
     justifyContent: "flex-start",
     paddingHorizontal: 15,
-    backgroundColor: "#ccc",
+    backgroundColor: new DynamicValue(
+      palette.lightSecondary,
+      palette.darkTertiary
+    ),
     borderRadius: 15,
     position: "relative",
   },
   textContainer: {
     marginLeft: 2,
+  },
+  text: {
+    color: new DynamicValue(palette.darkPrimary, palette.lightPrimary),
   },
   title: {
     fontSize: 18,

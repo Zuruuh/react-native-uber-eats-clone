@@ -1,11 +1,18 @@
 import React from "react";
-import { View, TextInput, StyleSheet } from "react-native";
+import { View, TextInput } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { useFormikContext } from "formik";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import FormError from "./FormError";
+import {
+  useDarkMode,
+  DynamicStyleSheet,
+  useDynamicValue,
+  DynamicValue,
+} from "react-native-dynamic";
+import palette from "styles/palette";
 
 interface props {
   title: string;
@@ -25,11 +32,17 @@ export default function FormInput({
   const [passwordVisibility, setPasswordVisibility] = React.useState(false);
   const { setFieldTouched, handleChange, errors, touched, values } =
     useFormikContext();
+  const darkMode = useDarkMode();
+  const styles = useDynamicValue(dynamicStyles);
   return (
     <View style={styles.container}>
       <View style={styles.field}>
         <View style={styles.iconWrapper}>
-          <FontAwesomeIcon icon={icon} size={24} />
+          <FontAwesomeIcon
+            color={darkMode ? palette.lightPrimary : palette.darkPrimary}
+            icon={icon}
+            size={24}
+          />
         </View>
 
         <TextInput
@@ -38,6 +51,9 @@ export default function FormInput({
           value={values[title]}
           secureTextEntry={passwordField && !passwordVisibility}
           placeholder={placeholder}
+          placeholderTextColor={
+            darkMode ? palette.lightPrimary : palette.darkPrimary
+          }
           onBlur={() => {
             setFieldTouched(title);
           }}
@@ -50,8 +66,7 @@ export default function FormInput({
             >
               <FontAwesomeIcon
                 size={24}
-                color="#000"
-                // icon={faEye}
+                color={darkMode ? palette.lightPrimary : palette.darkPrimary}
                 icon={passwordVisibility ? faEye : faEyeSlash}
               />
             </TouchableOpacity>
@@ -63,7 +78,7 @@ export default function FormInput({
   );
 }
 
-const styles = StyleSheet.create({
+const dynamicStyles = new DynamicStyleSheet({
   container: {
     marginVertical: 5,
     marginBottom: 10,
@@ -74,7 +89,10 @@ const styles = StyleSheet.create({
     height: 50,
     fontSize: 16,
     borderRadius: 8,
-    borderColor: "#ccc",
+    borderColor: new DynamicValue(
+      palette.darkSecondary,
+      palette.lightSecondary
+    ),
     flexDirection: "row",
     borderWidth: 1,
     position: "relative",
@@ -82,7 +100,10 @@ const styles = StyleSheet.create({
   iconWrapper: {
     width: 40,
     height: "100%",
-    borderRightColor: "#ccc",
+    borderRightColor: new DynamicValue(
+      palette.darkSecondary,
+      palette.lightSecondary
+    ),
     borderRightWidth: 1,
     alignItems: "center",
     justifyContent: "center",
@@ -91,7 +112,7 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
     flex: 1,
     fontSize: 16,
-    color: "#333",
+    color: new DynamicValue(palette.darkPrimary, palette.lightPrimary),
     justifyContent: "center",
     alignItems: "center",
   },

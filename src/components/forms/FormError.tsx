@@ -1,6 +1,7 @@
 import { FormikErrors } from "formik";
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
+import palette from "styles/palette";
 
 interface props {
   error: string;
@@ -21,6 +22,6 @@ const styles = StyleSheet.create({
     marginLeft: 2,
   },
   message: {
-    color: "#f00",
+    color: palette.error,
   },
 });

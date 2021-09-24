@@ -2,6 +2,8 @@ import { useFormikContext } from "formik";
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import Checkbox from "react-native-bouncy-checkbox";
+import palette from "styles/palette";
+import { useDarkMode } from "react-native-dynamic";
 
 interface props {
   label: string;
@@ -14,10 +16,11 @@ export default function FormCheckbox({
   label,
   title,
   isChecked = false,
-  color = "#2E64E5",
+  color = palette.primary,
 }: props) {
   const [checked, setChecked] = React.useState(true);
   const { handleChange, setFieldValue } = useFormikContext();
+  const darkMode = useDarkMode();
   return (
     <View style={styles.container}>
       <Checkbox
@@ -31,7 +34,14 @@ export default function FormCheckbox({
         fillColor={color}
         style={styles.checkbox}
       />
-      <Text style={styles.label}>{label}</Text>
+      <Text
+        style={[
+          styles.label,
+          { color: darkMode ? palette.lightPrimary : palette.darkPrimary },
+        ]}
+      >
+        {label}
+      </Text>
     </View>
   );
 }

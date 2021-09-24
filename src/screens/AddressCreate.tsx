@@ -11,6 +11,13 @@ import { faTags } from "@fortawesome/free-solid-svg-icons";
 import { db } from "store/firebase";
 import { useSelector } from "react-redux";
 import { RootState } from "store/store";
+import ScreenStyles from "styles/Screens";
+import {
+  useDynamicValue,
+  DynamicStyleSheet,
+  DynamicValue,
+} from "react-native-dynamic";
+import palette from "styles/palette";
 
 const Schema = yup.object().shape({
   name: yup.string().required("You have to choose a name"),
@@ -46,43 +53,50 @@ export default function AddressCreate({ navigation }: props) {
         }, 1500);
       });
   };
+
+  const screenStyles = useDynamicValue(ScreenStyles);
+  const styles = useDynamicValue(dynamicStyles);
+
   return (
-    <SafeAreaView style={SafeViewAndroid.AndroidSafeArea}>
-      <View style={styles.container}>
-        <View style={styles.innerContainer}>
+    <SafeAreaView style={screenStyles.safeArea}>
+      <View style={screenStyles.container}>
+        <View style={[screenStyles.innerContainer, styles.innerContainer]}>
           <Text style={styles.title}>Create a new address</Text>
-          <Form
-            validationSchema={Schema}
-            initialValues={{ name: "", address: "" }}
-            onSubmit={(values) => create(values)}
-          >
-            <SearchBar name="address" />
-            <FormInput
-              title="name"
-              placeholder="Name: (e.g: Home, Workplace, etc...)"
-              icon={faTags}
-            />
-            <FormSubmit text="Create" background="#2E64E5" />
-          </Form>
+          <View style={styles.form}>
+            <Form
+              validationSchema={Schema}
+              initialValues={{ name: "", address: "" }}
+              onSubmit={(values) => create(values)}
+            >
+              <SearchBar name="address" />
+              <FormInput
+                title="name"
+                placeholder="Name: (e.g: Home, Workplace, etc...)"
+                icon={faTags}
+              />
+              <FormSubmit text="Create" background="#2E64E5" />
+            </Form>
+          </View>
         </View>
         <Nav nav={navigation} />
       </View>
     </SafeAreaView>
   );
 }
-const styles = StyleSheet.create({
+const dynamicStyles = new DynamicStyleSheet({
   container: {
-    width: "100%",
-    height: "100%",
+    alignItems: "center",
   },
   innerContainer: {
-    height: "92%",
-    paddingHorizontal: 10,
-    backgroundColor: "#fff",
     alignItems: "center",
-    paddingTop: 10,
+    paddingTop: 20,
+  },
+  form: {
+    width: "85%",
   },
   title: {
     fontSize: 24,
+    color: new DynamicValue(palette.darkPrimary, palette.lightPrimary),
+    textAlign: "center",
   },
 });

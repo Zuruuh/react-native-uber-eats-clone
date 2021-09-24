@@ -46,7 +46,6 @@ export default function Login({ navigation }: props) {
       const uid = await AsyncStorage.getItem("@user");
       return uid;
     };
-    console.log(rememberUser());
   }, []);
 
   const login = ({ email, password, rememberMe }: User, nav: any) => {

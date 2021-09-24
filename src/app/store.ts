@@ -6,6 +6,7 @@ import { searchBarReducer } from "reducers/searchBar/searchBarSlice";
 import { navbarReducer } from "reducers/navbar/navbarSlice";
 import { cartReducer } from "reducers/cart/cartSlice";
 import { userReducer } from "reducers/user/userSlice";
+import { addressReducer } from "reducers/address/addressSlice";
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
     navbar: navbarReducer,
     cart: cartReducer,
     user: userReducer,
+    address: addressReducer,
   },
 });
 

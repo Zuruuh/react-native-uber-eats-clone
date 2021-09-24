@@ -5,6 +5,7 @@ import { bottomPopperReducer } from "reducers/bottomPopper/bottomPopperSlice";
 import { searchBarReducer } from "reducers/searchBar/searchBarSlice";
 import { navbarReducer } from "reducers/navbar/navbarSlice";
 import { cartReducer } from "reducers/cart/cartSlice";
+import { userReducer } from "reducers/user/userSlice";
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     searchBar: searchBarReducer,
     navbar: navbarReducer,
     cart: cartReducer,
+    user: userReducer,
   },
 });
 

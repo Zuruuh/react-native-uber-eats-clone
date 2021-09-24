@@ -5,6 +5,7 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import { useDispatch } from "react-redux";
 import { logOut } from "reducers/user/userSlice";
+import { setNavbar } from "reducers/navbar/navbarSlice";
 
 interface props {
   nav: any;
@@ -17,6 +18,7 @@ export default function UserActions({ nav }: props) {
       AsyncStorage.removeItem("user").then(() => {
         nav.navigate("login");
         dispatch(logOut());
+        dispatch(setNavbar("home"));
       });
     } catch (err) {}
   };

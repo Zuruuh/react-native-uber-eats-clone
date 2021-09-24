@@ -1,9 +1,9 @@
 import { faUser } from "@fortawesome/free-regular-svg-icons";
 import {
   faHome,
+  faMapMarkerAlt,
   faReceipt,
   faSearch,
-  faShoppingBag,
 } from "@fortawesome/free-solid-svg-icons";
 import { navButton } from "types/nav";
 
@@ -19,9 +19,9 @@ export const navData = [
     icon: faSearch,
   },
   {
-    id: "grocery",
-    title: "Grocery",
-    icon: faShoppingBag,
+    id: "address",
+    title: "Address",
+    icon: faMapMarkerAlt,
   },
   {
     id: "orders",

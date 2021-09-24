@@ -21,7 +21,7 @@ export default function Button({
   color = "#fff",
   icon = null,
   disabled = false,
-  iconSize,
+  iconSize = null,
 }: props) {
   return (
     <TouchableOpacity
@@ -31,12 +31,7 @@ export default function Button({
     >
       <View style={ButtonStyle.iconWrapper}>
         {!!icon && (
-          <FontAwesomeIcon
-            style={ButtonStyle.icon}
-            icon={icon}
-            color={color}
-            size={24}
-          />
+          <FontAwesomeIcon icon={icon} color={color} size={iconSize ?? 24} />
         )}
       </View>
       <Text style={[{ color }, ButtonStyle.text]}>{text}</Text>

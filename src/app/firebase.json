@@ -1,0 +1,10 @@
+{
+  "firebaseConfig": {
+    "apiKey": "AIzaSyAD0gtzNQ3ruozYeFFLKLcy2W0EELHQtLQ",
+    "authDomain": "zuruh-uber-eats-clone.firebaseapp.com",
+    "projectId": "zuruh-uber-eats-clone",
+    "storageBucket": "zuruh-uber-eats-clone.appspot.com",
+    "messagingSenderId": "77373844896",
+    "appId": "1:77373844896:web:116d547a8bb8161b1888c5"
+  }
+}

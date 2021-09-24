@@ -87,6 +87,7 @@ export default function Login({ navigation }: props) {
         <Image
           style={AuthStyle.image}
           source={require("assets/icons/uber-eats-logo-2.png")}
+          resizeMode="contain"
         />
         <View style={AuthStyle.titleContainer}>
           <Text style={AuthStyle.title}>Register</Text>

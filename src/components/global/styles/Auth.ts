@@ -9,7 +9,7 @@ export default StyleSheet.create({
   },
   image: {
     width: 350,
-    height: 150,
+    maxHeight: 175,
   },
   titleContainer: {
     marginVertical: 10,

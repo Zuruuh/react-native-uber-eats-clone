@@ -63,6 +63,7 @@ export default function Register({ navigation }: props) {
       <Image
         style={AuthStyle.image}
         source={require("assets/icons/uber-eats-logo-2.png")}
+        resizeMode="contain"
       />
       <View style={AuthStyle.titleContainer}>
         {/* <FontAwesomeIcon icon={faUser} color="#666" size={32} /> */}

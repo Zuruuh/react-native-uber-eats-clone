@@ -2,6 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
+      "styles/*": ["src/components/global/styles/*"],
       "components/*": ["src/components/*"],
       "reducers/*": ["src/reducers/*"],
       "screens/*": ["src/screens/*"],

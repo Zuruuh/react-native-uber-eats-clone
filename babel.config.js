@@ -8,13 +8,14 @@ module.exports = function (api) {
         {
           root: ["./"],
           alias: {
+            styles: "./src/components/global/styles",
             components: "./src/components",
             reducers: "./src/reducers",
             screens: "./src/screens",
+            types: "./src/types",
             store: "./src/app",
             assets: "./assets",
             data: "./data",
-            types: "./src/types",
           },
         },
       ],

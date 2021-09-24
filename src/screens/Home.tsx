@@ -1,6 +1,6 @@
 import PlacesSearchBar from "components/home/search/PlacesSearchBar";
 import React from "react";
-import { SafeAreaView, ScrollView, View } from "react-native";
+import { SafeAreaView, ScrollView, StyleSheet, View } from "react-native";
 import HeaderTabs from "components/home/header/HeaderTabs";
 import Categories from "components/home/category/Categories";
 import CategoryPopper from "components/home/category/CategoryPopper";
@@ -9,7 +9,11 @@ import RestaurantItems from "components/home/restaurant-items/RestaurantItems";
 import Nav from "components/layout/navbar/Nav";
 import SafeViewAndroid from "components/views/SafeViewAndroid";
 
-export default function Home(props: { navigation: any }) {
+interface props {
+  navigation: any;
+}
+
+export default function Home({ navigation }: props) {
   return (
     <SafeAreaView
       style={[
@@ -17,18 +21,30 @@ export default function Home(props: { navigation: any }) {
         { backgroundColor: "#eee", flex: 1 },
       ]}
     >
-      <View style={{ backgroundColor: "white", padding: 15 }}>
-        <HeaderTabs />
-        <PlacesSearchBar />
+      <View style={styles.container}>
+        <View style={styles.innerContainer}>
+          <HeaderTabs />
+          <PlacesSearchBar />
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <Categories />
+            <RestaurantItems nav={navigation} />
+          </ScrollView>
+        </View>
+        <Nav nav={navigation} />
       </View>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <Categories />
-        <RestaurantItems nav={props.navigation} />
-      </ScrollView>
-      <Nav />
-      <PopperContainer>
-        <CategoryPopper />
-      </PopperContainer>
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    height: "100%",
+    width: "100%",
+    backgroundColor: "#fff",
+  },
+  innerContainer: {
+    width: "100%",
+    height: "92%",
+    padding: 15,
+  },
+});

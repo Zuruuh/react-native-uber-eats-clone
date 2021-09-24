@@ -1,42 +1,57 @@
 import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { navButton } from "types/nav";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "store/store";
 import { setNavbar } from "reducers/navbar/navbarSlice";
 
-export default function NavButton(props: { button: navButton }) {
+interface props {
+  button: navButton;
+  nav: any;
+}
+
+export default function NavButton({ button, nav }: props) {
   const currentNav = useSelector((state: RootState) => state.navbar.value);
   const dispatch = useDispatch();
-  //#EDECED
+
   return (
     <TouchableOpacity
       onPress={() => {
-        dispatch(setNavbar(props.button.id));
+        nav.navigate(button.id);
+        dispatch(setNavbar(button.id));
       }}
     >
-      <View
-        style={{
-          alignItems: "center",
-        }}
-      >
+      <View style={styles.container}>
         <FontAwesomeIcon
-          icon={props.button.icon}
+          icon={button.icon}
           size={24}
-          style={{
-            alignSelf: "center",
-          }}
-          color={currentNav === props.button.id ? "#000" : "#5D5F63"}
+          style={styles.icon}
+          color={currentNav === button.id ? "#000" : "#5D5F63"}
         />
         <Text
-          style={{
-            color: currentNav === props.button.id ? "#000" : "#5D5F63",
-          }}
+          style={[
+            {
+              color: currentNav === button.id ? "#000" : "#5D5F63",
+            },
+            styles.text,
+          ]}
         >
-          {props.button.title}
+          {button.title}
         </Text>
       </View>
     </TouchableOpacity>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    alignItems: "center",
+  },
+  icon: {
+    alignSelf: "center",
+  },
+  text: {
+    textAlign: "center",
+  },
+});

@@ -16,6 +16,8 @@ import AddressCreate from "screens/AddressCreate";
 import { ColorSchemeProvider } from "react-native-dynamic";
 import { useSelector } from "react-redux";
 import { RootState } from "store/store";
+import Delivery from "screens/Delivery";
+import Order from "screens/Order";
 
 export default function RootNavigation() {
   const Stack = createStackNavigator();
@@ -41,12 +43,14 @@ export default function RootNavigation() {
           initialRouteName={firstLaunch ? "login" : "onboarding"}
           screenOptions={screenOptions}
         >
+          <Stack.Screen name="addresscreate" component={AddressCreate} />
           <Stack.Screen name="onboarding" component={Onboarding} />
           <Stack.Screen name="register" component={Register} />
+          <Stack.Screen name="delivery" component={Delivery} />
           <Stack.Screen name="account" component={Account} />
           <Stack.Screen name="details" component={Details} />
           <Stack.Screen name="address" component={Address} />
-          <Stack.Screen name="addresscreate" component={AddressCreate} />
+          <Stack.Screen name="order" component={Order} />
           <Stack.Screen name="login" component={Login} />
           <Stack.Screen name="home" component={Home} />
         </Stack.Navigator>

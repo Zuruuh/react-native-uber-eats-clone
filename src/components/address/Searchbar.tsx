@@ -18,7 +18,6 @@ interface props {
 
 export default function PlacesSearchBar({ name }: props) {
   const { handleChange, errors, touched, setFieldValue } = useFormikContext();
-  const [city, setCity] = React.useState("Paris");
   const handle = (data: GooglePlaceData, details: GooglePlaceDetail = null) => {
     setFieldValue(name, data.description);
     handleChange(name);

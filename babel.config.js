@@ -6,13 +6,24 @@ module.exports = function (api) {
       [
         "module-resolver",
         {
-          root: ["./src"],
+          root: ["./"],
           alias: {
+            styles: "./src/components/global/styles",
             components: "./src/components",
-            features: "./src/features",
+            reducers: "./src/reducers",
             screens: "./src/screens",
+            types: "./src/types",
             store: "./src/app",
+            assets: "./assets",
+            data: "./data",
           },
+        },
+      ],
+      [
+        "module:react-native-dotenv",
+        {
+          moduleName: "@env",
+          path: ".env",
         },
       ],
     ],

@@ -7,6 +7,8 @@ import Nav from "components/layout/navbar/Nav";
 import AddressSelector from "components/home/address/AddressSelector";
 import ScreenStyles from "styles/Screens";
 import { useDynamicValue } from "react-native-dynamic";
+import { useDispatch } from "react-redux";
+import { clearCart } from "reducers/cart/cartSlice";
 
 interface props {
   navigation: any;
@@ -14,6 +16,8 @@ interface props {
 
 export default function Home({ navigation }: props) {
   const screen = useDynamicValue(ScreenStyles);
+  const dispatch = useDispatch();
+  dispatch(clearCart());
 
   return (
     <SafeAreaView style={screen.safeArea}>

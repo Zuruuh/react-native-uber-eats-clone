@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "store/store";
 import ScreenStyles from "styles/Screens";
 import { useDynamicValue } from "react-native-dynamic";
+
 interface props {
   navigation: any;
 }

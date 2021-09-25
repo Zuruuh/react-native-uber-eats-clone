@@ -2,8 +2,6 @@ import React from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "store/store";
-import { setCategory } from "reducers/categories/categorySlice";
-import { setbottomPopper } from "reducers/bottomPopper/bottomPopperSlice";
 import {
   useDynamicValue,
   DynamicStyleSheet,
@@ -17,19 +15,10 @@ interface props {
 }
 
 export default function Category({ category }: props) {
-  const activeCategory = useSelector(
-    (state: RootState) => state.category.value
-  );
-  activeCategory;
   const dispatch = useDispatch();
   const styles = useDynamicValue(dynamicStyles);
   return (
-    <TouchableOpacity
-      onPress={() => {
-        dispatch(setbottomPopper(""));
-        dispatch(setCategory(category.name));
-      }}
-    >
+    <TouchableOpacity onPress={() => {}}>
       <View style={styles.innerContainer}>
         <View style={styles.item}>
           <Image

@@ -15,6 +15,7 @@ export default {
   primary: "#3361e0",
   secondary: "#83d242",
   tertiary: "#06C167",
+  success: "#1BA345",
   error: "#f00",
   /* Text Colors */
   textPrimary: "#fff",

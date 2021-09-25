@@ -1,51 +1,27 @@
 import React from "react";
-import {
-  NativeScrollEvent,
-  NativeSyntheticEvent,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { menu } from "data/menu";
 import MenuItem from "./MenuItem";
 import { Divider } from "react-native-elements";
 import ViewCart from "components/details/cart/ViewCart";
+import {
+  useDynamicValue,
+  DynamicStyleSheet,
+  DynamicValue,
+} from "react-native-dynamic";
+import palette from "styles/palette";
 
-export default function MenuItems(props: { nav: any; route: any }) {
-  const [scrolled, setScrolled] = React.useState(true);
-  const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    const e = event.nativeEvent;
-    let max = e.layoutMeasurement.height / 6;
-    // setScrolled(e.contentOffset.y > (max / 100) * 5);
-    // TODO Add bounce/spring animation when button is visible
-  };
+interface props {
+  route: any;
+  nav: any;
+}
 
-  const styles = StyleSheet.create({
-    container: {
-      marginHorizontal: 10,
-    },
-    title: {
-      fontSize: 24,
-      fontWeight: "700",
-    },
-    divider: {
-      marginBottom: 10,
-    },
-    blank: {
-      height: 30,
-    },
-    buttonContainer: {
-      position: "absolute",
-      bottom: scrolled ? 150 : 0,
-      left: 0,
-      width: "100%",
-    },
-  });
+export default function MenuItems({ nav, route }: props) {
+  const styles = useDynamicValue(dynamicStyles);
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Menu</Text>
-      <ScrollView onScroll={(event) => handleScroll(event)}>
+      <ScrollView>
         {menu.map((item, index) => (
           <View key={`${index}-${item.title}`}>
             <MenuItem item={item} />
@@ -55,8 +31,32 @@ export default function MenuItems(props: { nav: any; route: any }) {
         <View style={styles.blank}></View>
       </ScrollView>
       <View style={styles.buttonContainer}>
-        <ViewCart nav={props.nav} route={props.route} />
+        <ViewCart nav={nav} route={route} />
       </View>
     </View>
   );
 }
+
+const dynamicStyles = new DynamicStyleSheet({
+  container: {
+    marginHorizontal: 10,
+    backgroundColor: "transparent",
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "700",
+    color: new DynamicValue(palette.darkPrimary, palette.lightPrimary),
+  },
+  divider: {
+    marginBottom: 10,
+  },
+  blank: {
+    height: 60,
+  },
+  buttonContainer: {
+    position: "absolute",
+    left: 0,
+    bottom: 130,
+    width: "100%",
+  },
+});

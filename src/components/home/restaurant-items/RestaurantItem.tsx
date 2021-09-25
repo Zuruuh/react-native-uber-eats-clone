@@ -10,22 +10,24 @@ import {
 } from "react-native-dynamic";
 import palette from "styles/palette";
 
-export default function RestaurantItem(props: {
+interface props {
   restaurant: Restaurant;
   nav: any;
-}) {
+}
+
+export default function RestaurantItem({ restaurant, nav }: props) {
   const styles = useDynamicValue(dynamicStyles);
   return (
     <TouchableOpacity
       activeOpacity={0.8}
       style={styles.container}
       onPress={() => {
-        props.nav.navigate("details", { restaurant: { ...props.restaurant } });
+        nav.navigate("details", { restaurant: { ...restaurant } });
       }}
     >
       <View>
-        <RestaurantImage image={props.restaurant.image_url} />
-        <RestaurantInfo restaurant={props.restaurant} />
+        <RestaurantImage image={restaurant.image_url} />
+        <RestaurantInfo restaurant={restaurant} />
       </View>
     </TouchableOpacity>
   );

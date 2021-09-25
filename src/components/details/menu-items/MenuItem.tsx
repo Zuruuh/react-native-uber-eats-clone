@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, Image, TouchableOpacity } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteCartItem, setCartItem } from "reducers/cart/cartSlice";
 import { RootState } from "store/store";
@@ -8,9 +8,17 @@ import { Menu } from "types/menu";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faCheckCircle } from "@fortawesome/free-regular-svg-icons";
 import QuantityPicker from "./QuantityPicker";
+import {
+  useDynamicValue,
+  DynamicStyleSheet,
+  DynamicValue,
+} from "react-native-dynamic";
+import palette from "styles/palette";
+interface props {
+  item: Menu;
+}
 
-export default function MenuItem(props: { item: Menu }) {
-  const { item } = props;
+export default function MenuItem({ item }: props) {
   const cart = useSelector((state: RootState) => state.cart.value);
   const [inCart, setInCart] = React.useState(false);
   const dispatch = useDispatch();
@@ -35,10 +43,13 @@ export default function MenuItem(props: { item: Menu }) {
     }
   };
 
-  const styles = StyleSheet.create({
+  const dynamicStyles = new DynamicStyleSheet({
     menuItem: {
       flexDirection: "row",
-      backgroundColor: "#eee",
+      backgroundColor: new DynamicValue(
+        palette.lightTertiary,
+        palette.darkTertiary
+      ),
       marginBottom: 10,
       borderRadius: 8,
       justifyContent: inCart ? "flex-start" : "space-between",
@@ -49,8 +60,8 @@ export default function MenuItem(props: { item: Menu }) {
       height: 175,
       width: "100%",
       borderTopLeftRadius: inCart ? 8 : 0,
-      borderBottomLeftRadius: inCart ? 8 : 0,
       borderTopRightRadius: inCart ? 0 : 8,
+      borderBottomLeftRadius: inCart ? 8 : 0,
       borderBottomRightRadius: inCart ? 0 : 8,
     },
     imageContainer: {
@@ -76,12 +87,14 @@ export default function MenuItem(props: { item: Menu }) {
       height: 175,
       borderTopRightRadius: 8,
       borderBottomRightRadius: 8,
-      backgroundColor: "#1BA345",
+      backgroundColor: palette.success,
       alignItems: "center",
+    },
+    text: {
+      color: new DynamicValue(palette.darkPrimary, palette.lightPrimary),
     },
     smallText: {
       fontSize: 12,
-      color: "#fff",
     },
     quantityIcon: {
       marginVertical: 4,
@@ -89,6 +102,8 @@ export default function MenuItem(props: { item: Menu }) {
       opacity: inCart ? 1 : 0,
     },
   });
+
+  const styles = useDynamicValue(dynamicStyles);
 
   return (
     <View style={{ flexDirection: "row" }}>
@@ -99,12 +114,12 @@ export default function MenuItem(props: { item: Menu }) {
         style={styles.menuItem}
       >
         <View style={styles.textContainer}>
-          <Text style={styles.title}>{item.title}</Text>
-          <Text>{item.description}</Text>
-          <Text style={styles.price}>{item.price}€</Text>
+          <Text style={[styles.title, styles.text]}>{item.title}</Text>
+          <Text style={[styles.text]}>{item.description}</Text>
+          <Text style={[styles.price, styles.text]}>{item.price}€</Text>
         </View>
         <View style={styles.imageContainer}>
-          <Image source={{ uri: item.image }} style={styles.image}></Image>
+          <Image source={{ uri: item.image }} style={styles.image} />
         </View>
       </TouchableOpacity>
       <View style={styles.quantityContainer}>

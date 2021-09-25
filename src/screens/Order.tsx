@@ -23,7 +23,10 @@ export default function Order({ route, navigation }: props) {
   const styles = useDynamicValue(dynamicStyles);
 
   const redirectToDelivery = () => {
-    navigation.navigate("delivery", { restaurant: route.params.restaurant });
+    navigation.navigate("delivery", {
+      restaurant: route.params.restaurant,
+      cart,
+    });
   };
 
   return (

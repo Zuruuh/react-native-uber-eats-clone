@@ -17,6 +17,7 @@ interface props {
 export default function Address({ navigation }: props) {
   const screenStyles = useDynamicValue(ScreenStyles);
   const styles = useDynamicValue(dynamicStyles);
+
   return (
     <SafeAreaView style={screenStyles.safeArea}>
       <View style={screenStyles.container}>

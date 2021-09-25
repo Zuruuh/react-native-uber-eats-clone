@@ -74,9 +74,8 @@ export default function Map({
   }, [fullCurrent, fullDestination]);
 
   const redirectToPayment = () => {
-    nav.redirect("payment", {
-      user,
-      total,
+    nav.navigate("payment", {
+      restaurant: destinationName,
     });
   };
 

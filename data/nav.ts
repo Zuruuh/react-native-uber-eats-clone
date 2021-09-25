@@ -24,7 +24,7 @@ export const navData = [
     icon: faMapMarkerAlt,
   },
   {
-    id: "orders",
+    id: "previous-orders",
     title: "Orders",
     icon: faReceipt,
   },

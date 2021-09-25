@@ -18,6 +18,9 @@ import { useSelector } from "react-redux";
 import { RootState } from "store/store";
 import Delivery from "screens/Delivery";
 import Order from "screens/Order";
+import Search from "screens/Search";
+import Payment from "screens/Payment";
+import PreviousOrders from "screens/PreviousOrders";
 
 export default function RootNavigation() {
   const Stack = createStackNavigator();
@@ -40,9 +43,10 @@ export default function RootNavigation() {
     <ColorSchemeProvider mode={!darkMode ? "dark" : "light"}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName={firstLaunch ? "login" : "onboarding"}
+          initialRouteName={firstLaunch ? "onboarding" : "login"}
           screenOptions={screenOptions}
         >
+          <Stack.Screen name="previous-orders" component={PreviousOrders} />
           <Stack.Screen name="addresscreate" component={AddressCreate} />
           <Stack.Screen name="onboarding" component={Onboarding} />
           <Stack.Screen name="register" component={Register} />
@@ -50,6 +54,8 @@ export default function RootNavigation() {
           <Stack.Screen name="account" component={Account} />
           <Stack.Screen name="details" component={Details} />
           <Stack.Screen name="address" component={Address} />
+          <Stack.Screen name="payment" component={Payment} />
+          <Stack.Screen name="browse" component={Search} />
           <Stack.Screen name="order" component={Order} />
           <Stack.Screen name="login" component={Login} />
           <Stack.Screen name="home" component={Home} />

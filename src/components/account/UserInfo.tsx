@@ -26,7 +26,7 @@ export default function UserInfo({ user }: props) {
           }}
         />
         <View style={styles.badgeInner}>
-          <Text style={styles.name}>{user?.name ?? ""}jqsdhjhjqsgfhjqgdq</Text>
+          <Text style={styles.name}>{user?.name ?? ""}</Text>
           <Text style={styles.email}>{user?.email ?? ""}</Text>
         </View>
       </View>

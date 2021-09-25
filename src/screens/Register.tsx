@@ -30,7 +30,7 @@ const register = ({ firstName, email, password }: User, nav: any) => {
     .createUserWithEmailAndPassword(email, password)
     .then((user) => {
       user.user.updateProfile({ displayName: firstName }).then(() => {
-        nav.navigate("address");
+        nav.navigate("home");
       });
     })
     .catch((error) => {

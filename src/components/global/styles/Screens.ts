@@ -5,7 +5,7 @@ import palette from "./palette";
 export default new DynamicStyleSheet({
   safeArea: {
     flex: 1,
-    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+    // paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
   container: {
     backgroundColor: new DynamicValue(

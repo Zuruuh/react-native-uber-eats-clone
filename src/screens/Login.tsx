@@ -1,7 +1,6 @@
 import {
   View,
   Text,
-  Image,
   TouchableOpacity,
   Alert,
   SafeAreaView,
@@ -87,11 +86,6 @@ export default function Login({ navigation }: props) {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={[styles.container, AuthStyle.container]}>
-        {/* <Image
-          style={AuthStyle.image}
-          source={require("assets/icons/uber-eats-logo-2.png")}
-          resizeMode="contain"
-        /> */}
         <View style={AuthStyle.titleContainer}>
           <Text style={AuthStyle.title}>Login</Text>
         </View>
